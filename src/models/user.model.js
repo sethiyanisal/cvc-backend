@@ -35,8 +35,38 @@ const findUser = (email, res) => {
   });
 };
 
+const signInUser = (email, password) => {
+  return new Promise((resolve, reject) => {
+    const sql = "SELECT * FROM users WHERE email=? AND password_hash =?";
+      db.query(sql, [email, password], (error, results) => {
+        if (error) throw error;
+
+        if (results.length === 0 && !error) {
+          reject();
+        } else {
+          resolve(results[0]);
+        }
+      });
+  });
+};
+
+const getAllLocations = (res) => {
+  return new Promise((resolve, reject) => {
+    const sql = "SELECT first_name, last_name, contact_number, role, latitude, longitude FROM users WHERE role IN ('Planter', 'Seller', 'AgriOfficer')";
+      db.query(sql, (error, results) => {
+        if (error) throw error;
+        if (results && !error) {
+          resolve(results);
+        } else {
+          reject();
+        }
+      });
+  });
+};
 
 module.exports = {
   createUser,
-  findUser
+  findUser,
+  signInUser,
+  getAllLocations
 }
