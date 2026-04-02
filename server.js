@@ -8,6 +8,8 @@ const { db } = require('./src/config/database');
 
 //import APIs
 const UserApi = require('./src/apis/user.api');
+const PlanterApi = require('./src/apis/planter.api');
+const AdminApi = require('./src/apis/admin.api');
 
 dotenv.config();
 const app = express();
@@ -23,6 +25,8 @@ app.get('/', (req, res) => {
 
 //register router - CHANGEABLE
 app.use('/', UserApi());
+app.use('/Planter', PlanterApi());
+app.use('/Admin', AdminApi());
 
 app.listen(DB_PORT, () => {
   console.log(`Server is running on port ${DB_PORT}`);
