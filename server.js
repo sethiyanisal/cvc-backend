@@ -28,6 +28,7 @@ app.use('/', UserApi());
 app.use('/Planter', PlanterApi());
 app.use('/Admin', AdminApi());
 
+//Port listening
 app.listen(DB_PORT, () => {
   console.log(`Server is running on port ${DB_PORT}`);
 });
