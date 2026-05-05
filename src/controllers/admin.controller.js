@@ -9,8 +9,6 @@ const addAdminPrice = async (req, res) => {
             price,
             date
         };
-
-        console.log(data);
         await Admin.addAdminPrice(data, res);
     } catch (error) {
         console.error("Error adding admin price:", error);
@@ -29,7 +27,35 @@ const getPrices = async(req, res) => {
     }
 };
 
+const updateTodayPrice = async (req, res) => {
+    const { price} = req.body;
+    const ID = req.params.id;
+
+    try {
+        const data = {
+                price,
+                ID
+            }
+
+        await Admin.updateTodayPrice(data, res).then((data) =>{
+            if (data) {
+                return res.send({
+                error: false,
+                data: data,
+                message: 'succsessfully price updated',
+              });
+            }
+          })
+    } catch (error) {
+        return res.send({
+            error: true,
+            message: 'Internal server error',
+          }); 
+    }
+}
+
 module.exports = {
     addAdminPrice,
-    getPrices
+    getPrices,
+    updateTodayPrice
 };

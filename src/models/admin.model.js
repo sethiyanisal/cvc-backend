@@ -32,8 +32,26 @@ const getPrices = (req, res) => {
     });
 }
 
+const updateTodayPrice = (req, res) => {
+    const ID = req.ID;
+    const price = req.price;
+
+    return new Promise((resolve, reject) => {
+    const sql = "UPDATE admin_coconut_prices SET price = ? WHERE id = ?";
+      db.query(sql, [price, ID], (error, results) => {
+        if (error) throw error;
+        if (results && !error) {
+          resolve(results);
+        } else {
+          reject();
+        }
+      });
+  });
+}
+
 
 module.exports = {
     addAdminPrice,
-    getPrices
+    getPrices,
+    updateTodayPrice
 };
