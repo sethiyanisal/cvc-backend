@@ -10,6 +10,7 @@ const { db } = require('./src/config/database');
 const UserApi = require('./src/apis/user.api');
 const PlanterApi = require('./src/apis/planter.api');
 const AdminApi = require('./src/apis/admin.api');
+const BuyerApi = require('./src/apis/buyer.api');
 
 dotenv.config();
 const app = express();
@@ -27,6 +28,7 @@ app.get('/', (req, res) => {
 app.use('/', UserApi());
 app.use('/Planter', PlanterApi());
 app.use('/Admin', AdminApi());
+app.use('/Buyer', BuyerApi());
 
 //Port listening
 app.listen(DB_PORT, () => {

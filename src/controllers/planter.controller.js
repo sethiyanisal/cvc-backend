@@ -69,8 +69,20 @@ const updateTodayPrice = async (req, res) => {
     }
 }
 
+const getAllPrices = async (req, res) => {
+    try {
+      await Planter.getAllPrices(req, res).then((prices) =>{ 
+        res.send({ success: true, results: prices, message: "Prices retrieved successfully" });
+      });
+    } catch (error) {
+        console.error("Error retrieving prices:", error);
+        return res.status(500).json({ error: "Internal Server Error!" });
+    }
+};
+  
 module.exports = {
     addPlanterPrice,
     getTodayPrice,
-    updateTodayPrice
+    updateTodayPrice,
+    getAllPrices
 };

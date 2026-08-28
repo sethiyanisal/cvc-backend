@@ -52,8 +52,24 @@ const updateTodayPrice = (req, res) => {
   });
 }
 
+const getAllPrices = (req, res) => {
+    
+  return new Promise((resolve, reject) => {
+    const sql = "SELECT * FROM p_daily_prices WHERE entry_date = CURDATE()";
+    db.query(sql, (error, results) => {
+      if (error) throw error;
+      if (results && !error) {
+        resolve(results);
+      } else {
+        reject();
+      }
+    });
+  });
+}
+
 module.exports = {
     addPlanterPrice,
     getTodayPrice,
-    updateTodayPrice
+    updateTodayPrice,
+    getAllPrices
 }

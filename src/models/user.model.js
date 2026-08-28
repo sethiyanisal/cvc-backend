@@ -52,7 +52,7 @@ const signInUser = (email, password) => {
 
 const getAllLocations = (res) => {
   return new Promise((resolve, reject) => {
-    const sql = "SELECT first_name, last_name, contact_number, role, latitude, longitude FROM users WHERE role IN ('Planter', 'Seller', 'AgriOfficer')";
+    const sql = "SELECT user_id, first_name, last_name, contact_number, role, latitude, longitude FROM users WHERE role IN ('Planter', 'Buyer', 'AgriOfficer')";
       db.query(sql, (error, results) => {
         if (error) throw error;
         if (results && !error) {
